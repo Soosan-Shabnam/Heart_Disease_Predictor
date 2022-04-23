@@ -9,7 +9,7 @@ import pickle
 app = Flask(__name__)
 
 #Loads pre - trained model
-heart_model = pickle.load(open(r'\Models\heart_model.pkl', 'rb'))
+heart_model = pickle.load(open(r'Models\heart_model.pkl', 'rb'))
 
 #Implementing Interaction
 cols1 = [
