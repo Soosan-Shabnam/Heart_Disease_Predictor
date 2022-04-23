@@ -6,7 +6,7 @@ from sklearn import preprocessing
 import pickle
 
 #Initialize the Flask App
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 #Loads pre - trained model
 heart_model = pickle.load(open(r'heart_model.pkl', 'rb'))
@@ -58,8 +58,11 @@ def home():
 @app.route('/predict', methods = ['POST'])
 def predict():
 
+    form_el = ['bmi', 'smoking', 'alcoholdrinking', 'stroke', 'physical_health', 'mental_health', 'diff_walking', 'sex', 'age', 'race', 'diabetic', 'physical_activity', 'gen_health', 'sleep_time', 'asthma', 'kidney_disease', 'skin_cancer']
     val1 = [0 for _ in range(35)]
-    val2 = [i for i in request.form.values()]
+    val2 = []
+    for i in form_el:
+        val2.append(request.form[i])
 
     new_data1 = pd.DataFrame(dict(zip(cols1, val1)), columns = cols1, index = [0])
     new_data2 = pd.DataFrame(dict(zip(cols2, val2)), columns = cols2, index = [0])
